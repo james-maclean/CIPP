@@ -119,7 +119,7 @@
       },
       "name": "[variables('funcAppName')]",
       "location": "[resourceGroup().location]",
-      "kind": "functionapp",
+      "kind": "functionapp,linux",
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms',variables('serverFarmName'))]",
         "[resourceId('Microsoft.Storage/storageAccounts', variables('funcStorageName'))]"
@@ -129,6 +129,7 @@
         "siteConfig": {
           "Use32BitWorkerProcess": false,
           "powerShellVersion": "7.4",
+          "linuxFxVersion": "PowerShell|7.4",
           "appSettings": [
             {
               "name": "AzureWebJobsStorage",
@@ -188,6 +189,7 @@
       "apiVersion": "2018-02-01",
       "name": "[variables('serverFarmName')]",
       "location": "[resourceGroup().location]",
+      "kind": "linux",
       "sku": {
         "name": "Y1",
         "tier": "Dynamic",
@@ -199,7 +201,7 @@
         "perSiteScaling": false,
         "maximumElasticWorkerCount": 1,
         "isSpot": false,
-        "reserved": false,
+        "reserved": true,
         "isXenon": false,
         "hyperV": false,
         "targetWorkerCount": 0,
